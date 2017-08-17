@@ -1,0 +1,33 @@
+#include<stdio.h>
+typedef void(*FUNC)();
+struct A
+{
+	FUNC f;
+	int _a;
+};
+struct B
+{
+	struct A a;
+	int _b;
+};
+FUNC funa()
+{
+	printf("A\n");
+}
+FUNC funb()
+{
+	printf("B\n");
+}
+int main()
+{
+	struct A a;
+	struct B b;
+	a.f = funa();
+	b.a.f = funb();
+	
+	struct A *p = &a;
+	p->f();
+	p = (struct B*)&b;
+	p->f();
+	return 0;
+}
